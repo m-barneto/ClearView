@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using SPT.Reflection.Patching;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,12 @@ using System.Threading.Tasks;
 namespace CleanVisor {
     [BepInPlugin("Mattdokn.CleanVisor", "CleanVisor", "1.0.0")]
     public class CleanVisor : BaseUnityPlugin {
+        public static ConfigEntry<bool> hideVisorOverlay;
+
+
         private void Awake() {
+            hideVisorOverlay = Config.Bind("General", "Hide Visor Overlay", false, "If true, will hide the overlay.");
+
             new VisorEffectPatch().Enable();
             new VisorEffectPatch2().Enable();
         }
@@ -22,7 +28,7 @@ namespace CleanVisor {
         [PatchPrefix]
         public static void OnEnable(VisorEffect __instance) {
             Console.WriteLine("IDK man cmon");
-            //__instance.Visible = false;
+            __instance.Visible = !CleanVisor.hideVisorOverlay.Value;
         }
     }
 
