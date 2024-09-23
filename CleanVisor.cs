@@ -18,7 +18,6 @@ namespace CleanVisor {
             hideVisorOverlay = Config.Bind("General", "Hide Visor Overlay", false, "If true, will hide the overlay.");
 
             new VisorEffectPatch().Enable();
-            new VisorEffectPatch2().Enable();
         }
     }
 
@@ -27,19 +26,7 @@ namespace CleanVisor {
 
         [PatchPrefix]
         public static void OnEnable(VisorEffect __instance) {
-            Console.WriteLine("IDK man cmon");
             __instance.Visible = !CleanVisor.hideVisorOverlay.Value;
-        }
-    }
-
-    internal class VisorEffectPatch2 : ModulePatch {
-        protected override MethodBase GetTargetMethod() => typeof(VisorEffect).GetMethod("SetIntensity");
-
-        [PatchPrefix]
-        public static void SetIntensity(VisorEffect __instance, ref float intensity) {
-            Console.WriteLine($"RAAAA {intensity}");
-            intensity = 0.5f;
-            //__instance.Visible = false;
         }
     }
 
