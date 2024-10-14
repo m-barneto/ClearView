@@ -3,7 +3,7 @@ using BepInEx.Configuration;
 using static ClearView.VisorPatches;
 
 namespace ClearView {
-    [BepInPlugin("Mattdokn.ClearView", "ClearView", "1.0.0")]
+    [BepInPlugin("Mattdokn.ClearView", "ClearView", "0.0.1")]
     public class ClearView : BaseUnityPlugin {
         public static ConfigEntry<bool> HideVisorOverlay;
 
